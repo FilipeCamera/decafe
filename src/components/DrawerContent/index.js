@@ -1,8 +1,8 @@
 import React from 'react'
 
 import {View} from 'react-native'
-import {Drawer, Avatar, Title, Text,} from 'react-native-paper'
-import {DrawerItem, DrawerContentScrollView} from '@react-navigation/drawer'
+import {Drawer, Avatar} from 'react-native-paper'
+import {DrawerContentScrollView} from '@react-navigation/drawer'
 import {Feather, MaterialIcons} from '@expo/vector-icons'
 import styles from './styles'
 
@@ -14,6 +14,7 @@ export default function DrawerContent(props){
                     <View style={styles.boxAvatar}>
                         <View>
                             <Avatar.Image
+
                                 size={140}
                             />
                         </View>

@@ -1,15 +1,24 @@
 import React from 'react'
 
-import {View, Text} from 'react-native'
-import Header from '../../components/Header'
+import {ScrollView} from 'react-native'
 import CarouselProd from '../../components/Carousel'
 import Listprod from '../../components/ListProd'
 
+import * as Animatable from 'react-native-animatable'
+
 export default function Home(){
+
     return(
-        <View style={{backgroundColor: '#E0E094', flex: 1}}>
-            <CarouselProd />
-            <Listprod />
-        </View>
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={{backgroundColor: '#E0E094', flex: 1, paddingBottom: 50}}
+        >
+            <Animatable.View animation='zoomIn' duration={2400}>
+                <CarouselProd />
+            </Animatable.View>
+            <Animatable.View animation='slideInUp' duration={2500}>
+                <Listprod />
+            </Animatable.View>
+        </ScrollView>
     )
 }

@@ -4,7 +4,7 @@ import Login from './screens/Login'
 import Pedidos from './screens/Pedidos'
 
 import {TouchableOpacity} from 'react-native'
-
+import * as Animatable from 'react-native-animatable'
 import {AppLoading} from 'expo'
 import {useFonts} from '@use-expo/font'
 import {createStackNavigator} from '@react-navigation/stack'
@@ -38,7 +38,13 @@ export default function Routes(){
                         
                     },
                     headerLeft: false,
-                    headerTitle: 'DêCafé Bistrô',
+                    headerTitle: () => (
+                        <Animatable.Text animation='bounceIn' duration={1800} style={{
+                            fontFamily: 'brush-script-mt-italic',
+                            fontSize: 28,
+                            color: '#845A49'
+                        }}>DêCafé Bistrô</Animatable.Text>
+                    ),
                     headerTitleAlign: 'left',
                     headerTitleStyle: {
                         color: '#845A49',
@@ -46,9 +52,11 @@ export default function Routes(){
                         fontSize: 28
                     },
                     headerRight: () => (
-                        <TouchableOpacity style={{marginRight: 20}} onPress={() => navigation.navigate('Pedidos')}>
-                            <Feather name='shopping-bag' size={24} color='#845A49'/>
-                        </TouchableOpacity>
+                        <Animatable.View animation='bounceIn' duration={1800}>
+                            <TouchableOpacity style={{marginRight: 20}} onPress={() => navigation.navigate('Pedidos')}>
+                                <Feather name='shopping-bag' size={24} color='#845A49'/>
+                            </TouchableOpacity>
+                        </Animatable.View>
                     )
                 }
 

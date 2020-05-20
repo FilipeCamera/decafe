@@ -51,10 +51,10 @@ const styles = StyleSheet.create({
 	        width: 0,
 	        height: 5,
         },
-        shadowOpacity: 0.34,
-        shadowRadius: 6.27,
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
 
-        elevation: 10,
+        elevation: 1,
     }
 })
 

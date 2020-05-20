@@ -6,10 +6,9 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#845A49',
         marginTop: 40,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
+        //borderTopLeftRadius: 50,
+        //borderTopRightRadius: 50,
         alignItems: 'center',
-        zIndex: 5
     },
     title: {
         marginTop: 10,
@@ -23,41 +22,34 @@ const styles = StyleSheet.create({
         width: 310,
         backgroundColor: 'rgba(111,70,53, 0.7)',
         flexDirection: 'row',
-        justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 20,
+        borderRadius: 10,
     },
     image: {
         margin: 10,
         width: 120,
         height: 120,
         backgroundColor: '#FFF',
-        borderRadius: 20
+        borderRadius: 10
     },
     titleBox: {
-        position: 'absolute',
-        top: -25,
-        fontSize: 14,
+        position: 'relative',
+        bottom: 15,
+        fontSize: 16,
         fontWeight: 'bold',
         color: '#E0E094'
     },
     desc: {
-        position: 'relative',
         paddingBottom: 10,
         fontSize: 12,
         color: '#E0E094'
     },
     valor: {
-        position: 'relative',
-        top: 25,
         fontWeight: '900',
         fontSize: 14,
         color: '#E0E094',
     },
     button: {
-        position: 'absolute',
-        top: 20,
-        right: 0,
         width: 40,
         height: 40,
         borderRadius: 20,
@@ -71,6 +63,9 @@ const styles = StyleSheet.create({
         paddingRight: 10
     },
     box2: {
+        position:'relative',
+        top: 20,
+        width: 140,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'

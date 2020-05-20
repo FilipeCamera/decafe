@@ -12,11 +12,11 @@ import Pedidos from '../screens/Pedidos'
 
 const Drawer = createDrawerNavigator()
 
-export default function DrawerNavigation(){
+export default function DrawerNavigation({route}){
     return(
         <Drawer.Navigator 
             initialRouteName='Home' 
-            drawerContent={props => <DrawerContent {...props}/>}
+            drawerContent={props => <DrawerContent {...props} {...route}/>}
         >
             <Drawer.Screen name='Home' component={Home} />
             <Drawer.Screen name='UsuarioDrawer' component={Users} />
