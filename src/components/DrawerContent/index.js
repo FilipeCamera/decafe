@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React, {useContext, useState} from 'react'
+import AuthContext from '../../contexts/authContext'
 import {View} from 'react-native'
 import {Drawer, Avatar} from 'react-native-paper'
 import {DrawerContentScrollView} from '@react-navigation/drawer'
@@ -7,6 +7,7 @@ import {Feather, MaterialIcons} from '@expo/vector-icons'
 import styles from './styles'
 
 export default function DrawerContent(props){
+    const {user, signOut} = useContext(AuthContext)
     return(
         <View style={{flex: 1}}>
             <DrawerContentScrollView {...props}>
@@ -14,7 +15,7 @@ export default function DrawerContent(props){
                     <View style={styles.boxAvatar}>
                         <View>
                             <Avatar.Image
-
+                                source={{uri: user.photoUrl}}
                                 size={140}
                             />
                         </View>
@@ -59,7 +60,7 @@ export default function DrawerContent(props){
                     style={{width: '100%'}} 
                     icon={() => <Feather name='log-out' size={24} color='#845A49'/>}
                     label='Sign Out'
-                    onPress={() => props.navigation.navigate('Login')}
+                    onPress={signOut}
                 />
             </Drawer.Section>
         </View>

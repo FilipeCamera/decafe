@@ -1,21 +1,23 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 
 import {expo} from '../../../app.json'
 
 import {View, Text, Image} from 'react-native'
 import {Switch} from 'react-native-paper'
 import styles from './styles'
+import AuthContext from '../../contexts/authContext'
 
 export default function Users(){
+    const {user} = useContext(AuthContext)
     const [location, setLocation] = useState(false)
 
     return(
         <View style={styles.container}>
             <Text style={styles.title}>Usuário</Text>
             <View style={styles.box}>
-                <Image style={styles.boxImage}/>
+                <Image style={styles.boxImage} source={{uri: user.photoUrl}}/>
                 <View style={styles.boxText}>
-                    <Text style={styles.text}>Nome: </Text>
+                    <Text style={styles.text}>Nome: {user.name}</Text>
                     <Text style={styles.text}>Retirada</Text>
                     <View style={styles.boxIntText}>
                         <Text style={styles.text}>-Local: </Text>

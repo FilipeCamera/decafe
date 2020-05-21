@@ -28,7 +28,10 @@ const styles = StyleSheet.create({
         width: 120,
         height: 120,
         backgroundColor: '#FFF',
+        borderWidth: 1,
+        borderColor: '#E0E094',
         borderRadius: 10,
+        backgroundColor: '#000'
     },
     boxText: {
         marginLeft: 5,

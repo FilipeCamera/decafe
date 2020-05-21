@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 
-import {NavigationContainer} from '@react-navigation/native'
+import { NavigationContainer } from "@react-navigation/native";
 
-import {StatusBar} from 'react-native'
-
-import Routes from './src/routes'
+import { AppLoading } from "expo";
+import * as Font from "expo-font";
+import { AuthProvider } from "./src/contexts/authContext";
+import Routes from "./src/routes";
 
 export default function App() {
   return (
-      <NavigationContainer>
+    <NavigationContainer>
+      <AuthProvider>
         <Routes />
-      </NavigationContainer>
+      </AuthProvider>
+    </NavigationContainer>
   );
 }
-

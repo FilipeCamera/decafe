@@ -1,40 +1,16 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 
-import androidClientId from '../../config/client_id';
+import AuthContext from '../../contexts/authContext'
 
 import {View, ImageBackground, TouchableOpacity, Text} from 'react-native'
 import {Feather, FontAwesome} from '@expo/vector-icons'
 
 import * as Animatable from 'react-native-animatable';
-import * as Google from 'expo-google-app-auth';
 
 import styles from './styles'
 
-
-export default function Login({navigation}) {
-    const [perfil, setPerfil] = useState({signedIn: true, name: '', photoUrl: ''})
-    
-    async function signInWithGoogleAsync() {
-        try {
-          const result = await Google.logInAsync({
-            androidClientId: androidClientId,
-            scopes: ['profile', 'email'],
-          });
-      
-          if (result.type === 'success') {
-            setPerfil({
-                signedIn: true,
-                name: result.user.name,
-                photoUrl: result.user.photoUrl
-            })
-            navigation.navigate('Home', {name: perfil.name, photoUrl: perfil.photoUrl})
-          } else {
-            return console.log('Cancelled');
-          }
-        } catch (e) {
-          return console.log('Error', e);
-        }
-    }
+export default function Login() {
+    const { signInWithGoogleAsync } = useContext(AuthContext)
     return(
         <View style={styles.container}>
             <View style={styles.boxImage}>
