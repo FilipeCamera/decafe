@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Pedidos from "../screens/Pedidos";
 
@@ -9,6 +9,7 @@ import DrawerNavigation from "../routes/Drawer.routes";
 import { Feather } from "@expo/vector-icons";
 import Users from "../screens/Users";
 import Feedback from "../screens/Feedback";
+
 
 const Stack = createStackNavigator();
 
@@ -28,7 +29,7 @@ export default function AppRoute() {
           headerTitle: () => (
             <Animatable.Text
               animation="bounceIn"
-              duration={1800}
+              duration={2000}
               style={{
                 fontFamily: "brush-script-mt-italic",
                 fontSize: 28,
@@ -45,7 +46,7 @@ export default function AppRoute() {
             fontSize: 28,
           },
           headerRight: () => (
-            <Animatable.View animation="bounceIn" duration={1800}>
+            <Animatable.View animation="bounceIn" duration={2000}>
               <TouchableOpacity
                 style={{ marginRight: 20 }}
                 onPress={() => navigation.navigate("Pedidos")}

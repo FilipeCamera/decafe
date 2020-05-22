@@ -4,7 +4,7 @@ import { AsyncStorage } from "react-native";
 import {useFonts} from '@use-expo/font';
 import androidClientId from "../config/client_id";
 import * as Google from "expo-google-app-auth";
-import { AppLoading } from "expo";
+import {View, ActivityIndicator} from 'react-native'
 
 const authContextData = {
   signed: Boolean,
@@ -16,21 +16,24 @@ const authContextData = {
 const AuthContext = createContext({ authContextData });
 
 export const AuthProvider = ({ children }) => {
+  let loadedFont = useFonts({
+    'brush-script-mt-italic': require('../../assets/fonts/brush-script-mt-italic.ttf')
+  })
   const [user, setUser] = useState(null);
-
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     async function loadStorage(){
       const AuthStorage = await AsyncStorage.getItem('AuthUser')
-      if(AsyncStorage){
+      console.log(AuthStorage)
+      if(AuthStorage){
         setUser(JSON.parse(AuthStorage))
+        setLoading(false)
+      } else {
+        setLoading(false)
       }
     }
     loadStorage()
   }, [])
-
-  let loadedFont = useFonts({
-    'brush-script-mt-italic': require('../../assets/fonts/brush-script-mt-italic.ttf')
-  })
 
   async function signInWithGoogleAsync() {
     try {
@@ -59,9 +62,11 @@ export const AuthProvider = ({ children }) => {
       console.log(e)
     ))
   }
-  if(!loadedFont){
+  if(loading){
     return(
-      <AppLoading />
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator size='large' color='#845A49'/>
+      </View>
     )
   } else{
     return (

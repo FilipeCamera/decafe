@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 
-import { AppLoading } from "expo";
-import * as Font from "expo-font";
 import { AuthProvider } from "./src/contexts/authContext";
 import Routes from "./src/routes";
 

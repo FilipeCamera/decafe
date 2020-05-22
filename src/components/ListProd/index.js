@@ -1,71 +1,68 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 
 import {
-    View, 
-    Text, 
-    SafeAreaView, 
-    FlatList, 
-    Image, 
-    TouchableOpacity,
-} from 'react-native'
-import { Feather } from '@expo/vector-icons'
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
+import { Feather } from "@expo/vector-icons";
 
-
-import styles from './styles'
-
+import styles from "./styles";
+import { api } from "../../services/api";
 
 export default function Listprod() {
-    const data = [
-        {   
-            id: 1,
-            title: 'Hambúrger',
-            desc: 'Feito com carne de boi 200g\n, queijo e pão de milho',
-            valor: 7.00.toPrecision(3)
-        },
-        {   
-            id: 2,
-            title: 'Hambúrger',
-            desc: 'Feito com carne de boi 200g\n, queijo e pão de milho',
-            valor: 7.00.toPrecision(3)
-        },
-        {   
-            id: 3,
-            title: 'Hambúrger',
-            desc: 'Feito com carne de boi 200g\n, queijo e pão de milho',
-            valor: 7.00.toPrecision(3)
-        },
-        {   
-            id: 4,
-            title: 'Hambúrger',
-            desc: 'Feito com carne de boi 200g\n, queijo e pão de milho',
-            valor: 7.00.toPrecision(3)
-        },
-    ]
-    function _renderItem({item}){
-        return(
-            <View style={styles.boxContainer}>
-                <Image style={styles.image}/>
-                <View style={styles.box}>
-                    <Text style={styles.titleBox}>title</Text>
-                    <Text style={styles.desc}>desc</Text>
-                    <View style={styles.box2}>
-                        <Text style={styles.valor}>R$ 7,00</Text>
-                        <TouchableOpacity style={styles.button}>
-                            <Feather name='shopping-cart' size={14} color='#845A49'/>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </View>
-        )
+  const [prodData, setProdData] = useState([]);
+
+  useEffect(() => {
+    async function loadProduto() {
+      await api.get("/Produtos.json").then((resp) => {
+        console.log(resp.data);
+        const fetchedProd = [];
+        for (let key in resp.data) {
+          fetchedProd.unshift({
+            ...resp.data[key],
+            id: key,
+          });
+        }
+        setProdData(fetchedProd);
+      });
     }
-    return(
-        <View style={styles.container}>
-            <Text style={styles.title}>Produtos</Text>
-            <SafeAreaView style={{paddingBottom: 20}}>
-                {data.map(item => (
-                    _renderItem(item)
-                ))}
-            </SafeAreaView>
-        </View>
-    )
+    loadProduto();
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Produtos</Text>
+      <SafeAreaView style={{ paddingBottom: 20 }}>
+        {prodData.length ? (
+          prodData.map((item) => (
+            <View style={styles.boxContainer} key={item.id}>
+                <Image style={styles.image} />
+                <Text style={styles.titleBox}>{item.title}</Text>
+                <Text style={styles.desc}>{item.desc}</Text>
+                <Text style={styles.valor}>R$ {item.valor}</Text>
+                <TouchableOpacity style={styles.button}>
+                    <Feather name="shopping-cart" size={14} color="#845A49" />
+                </TouchableOpacity>
+            </View>
+          ))
+        ) : (
+          <View
+            style={{
+              flex: 1,
+              height: 400,
+              backgroundColor: "#845A49",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <ActivityIndicator size='large' color='#E0E094'/>
+          </View>
+        )}
+      </SafeAreaView>
+    </View>
+  );
 }
