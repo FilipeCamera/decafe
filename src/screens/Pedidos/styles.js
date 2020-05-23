@@ -9,12 +9,12 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     box: {
+        flex: 1,
         alignItems: 'center',
         margin: 10,
         marginTop: 10,
         backgroundColor: '#E0E094',
         width: 320,
-        height: 250,
         borderRadius: 10,
         shadowColor: '#000',
         shadowOffset: {
@@ -32,7 +32,13 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         fontFamily: 'brush-script-mt-italic',
-        fontSize: 18,
+        fontSize: 20,
+        color: '#845A49'
+    },
+    headerTitle2: {
+        marginLeft: 20,
+        fontFamily: 'brush-script-mt-italic',
+        fontSize: 20,
         color: '#845A49'
     },
     footer: {
@@ -40,8 +46,8 @@ const styles = StyleSheet.create({
         height: 40,
         borderTopWidth: 1,
         borderTopColor: '#FFF',
-        position: 'absolute',
-        bottom: 0,
+        alignItems: 'center',
+        marginTop: 10,
         
     },
     footerTitle: {
@@ -50,6 +56,13 @@ const styles = StyleSheet.create({
         right: 80,
         fontFamily: 'brush-script-mt-italic',
         fontSize: 20,
+        color: '#845A49'
+    },
+    footerText: {
+        position: 'absolute',
+        right: 10,
+        top: 8,
+        fontSize: 16,
         color: '#845A49'
     },
     box2: {
@@ -80,7 +93,32 @@ const styles = StyleSheet.create({
     modeText: {
         color: '#845A49'
     },
-    button: {
+    boxList: {
+        width: '100%',
+        flexDirection: 'column',
+        marginTop: 10,
+    },
+    boxIntList: {
+        paddingLeft: 10,
+        paddingRight: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%'
+    },
+    boxQuant: {
+        width: 65,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    boxText: {
+        width: 90,
+        color: '#845A49',
+        textAlign: 'justify'
+    },
+    boxTextQV: {
+        color: '#845A49',
     }
 })
 

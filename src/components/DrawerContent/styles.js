@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     },
     drawerSec: {
         alignItems: 'center',
+        marginTop: 10,
     },
     bottomDrawerSec: {
         alignItems: 'center',
@@ -13,16 +14,18 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
     },
     boxAvatar: {
-        marginTop: 10,
-        marginBottom: 30,
+        paddingTop: 20,
+        paddingBottom: 20,
+        marginBottom: 10,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: '#E0E094'
     },
     avatarTitle: {
-        marginTop: 10,
-        marginBottom: 20,
-        fontSize: 16,
-        fontWeight: 'bold'
+        marginTop: 20,
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#845A49'
     }
 })
 

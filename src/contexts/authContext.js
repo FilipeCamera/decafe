@@ -9,18 +9,19 @@ import {View, ActivityIndicator} from 'react-native'
 const authContextData = {
   signed: Boolean,
   user: Object,
+  produtos: [],
   signInWithGoogleAsync: () => {},
   signOut: () => {},
 };
 
+
 const AuthContext = createContext({ authContextData });
 
 export const AuthProvider = ({ children }) => {
-  let loadedFont = useFonts({
-    'brush-script-mt-italic': require('../../assets/fonts/brush-script-mt-italic.ttf')
-  })
+  
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true)
+  const [produtos, setProdutos] = useState([])
   useEffect(() => {
     async function loadStorage(){
       const AuthStorage = await AsyncStorage.getItem('AuthUser')
@@ -34,7 +35,6 @@ export const AuthProvider = ({ children }) => {
     }
     loadStorage()
   }, [])
-
   async function signInWithGoogleAsync() {
     try {
       const result = await Google.logInAsync({
@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
   } else{
     return (
       <AuthContext.Provider
-        value={{ signed: !!user, user, signInWithGoogleAsync, signOut }}
+        value={{ signed: !!user, user, signInWithGoogleAsync, signOut, produtos, setProdutos }}
       >
         {children}
       </AuthContext.Provider>

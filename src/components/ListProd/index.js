@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import {
   View,
@@ -7,13 +7,18 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  Dimensions,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 import styles from "./styles";
 import { api } from "../../services/api";
+import AuthContext from "../../contexts/authContext";
+
+const { height } = Dimensions.get("window");
 
 export default function Listprod() {
+  const { produtos, setProdutos } = useContext(AuthContext);
   const [prodData, setProdData] = useState([]);
 
   useEffect(() => {
@@ -40,26 +45,39 @@ export default function Listprod() {
         {prodData.length ? (
           prodData.map((item) => (
             <View style={styles.boxContainer} key={item.id}>
-                <Image style={styles.image} />
-                <Text style={styles.titleBox}>{item.title}</Text>
-                <Text style={styles.desc}>{item.desc}</Text>
-                <Text style={styles.valor}>R$ {item.valor}</Text>
-                <TouchableOpacity style={styles.button}>
-                    <Feather name="shopping-cart" size={14} color="#845A49" />
-                </TouchableOpacity>
+              <Image style={styles.image} />
+              <Text style={styles.titleBox}>{item.title}</Text>
+              <Text style={styles.desc}>{item.desc}</Text>
+              <Text style={styles.valor}>R$ {item.valor}</Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() =>
+                  setProdutos([
+                    ...produtos,
+                    {
+                      id: Date.now(),
+                      name: item.title,
+                      quant: 1,
+                      valor: parseFloat(item.valor).toFixed(2),
+                    },
+                  ])
+                }
+              >
+                <Feather name="shopping-cart" size={14} color="#845A49" />
+              </TouchableOpacity>
             </View>
           ))
         ) : (
           <View
             style={{
               flex: 1,
-              height: 400,
+              height: height - height / 3,
               backgroundColor: "#845A49",
               justifyContent: "center",
               alignItems: "center",
             }}
           >
-            <ActivityIndicator size='large' color='#E0E094'/>
+            <ActivityIndicator size="large" color="#E0E094" />
           </View>
         )}
       </SafeAreaView>

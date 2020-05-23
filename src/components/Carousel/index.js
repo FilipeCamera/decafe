@@ -1,9 +1,8 @@
 import React, {useRef, useState, useEffect} from 'react'
 
 import Carousel from 'react-native-snap-carousel'
-import {View, Text, Dimensions, Image} from 'react-native'
+import {View, Dimensions, Image} from 'react-native'
 import { api } from '../../services/api'
-import * as Animatable from 'react-native-animatable'
 export default function CarouselProd() {
     const carouselRef = useRef(null)
     const {width} = Dimensions.get('window')
@@ -53,7 +52,7 @@ export default function CarouselProd() {
     }
 
     return(
-        <Animatable.View animation='bounceIn' style={{alignItems: 'center', marginTop: 20}}>
+        <View style={{alignItems: 'center', marginTop: 20}}>
             <Carousel
                 layout='default'
                 ref={carouselRef}
@@ -68,6 +67,6 @@ export default function CarouselProd() {
                     padding: 5,
                 }}
             />
-        </Animatable.View>
+        </View>
     )
 }

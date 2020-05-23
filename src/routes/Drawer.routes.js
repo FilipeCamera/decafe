@@ -19,9 +19,9 @@ export default function DrawerNavigation({route}){
             drawerContent={props => <DrawerContent {...props} {...route}/>}
         >
             <Drawer.Screen name='Home' component={Home} />
-            <Drawer.Screen name='UsuarioDrawer' component={Users} />
-            <Drawer.Screen name='PedidosDrawer' component={Pedidos}/>
-            <Drawer.Screen name='FeedbackDrawer' component={Feedback}/>
+            <Drawer.Screen name='Usuario' component={Users}/>
+            <Drawer.Screen name='Pedidos' component={Pedidos}/>
+            <Drawer.Screen name='Feedback' component={Feedback}/>
             <Drawer.Screen name='Sair' component={Login}/>
         </Drawer.Navigator>
     )
