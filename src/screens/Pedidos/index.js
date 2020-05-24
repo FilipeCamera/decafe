@@ -7,10 +7,11 @@ import { HeaderTwo } from "../../components/Header";
 import { Checkbox } from "react-native-paper";
 import { Feather } from "@expo/vector-icons";
 import AuthContext from "../../contexts/authContext";
+import { set } from "react-native-reanimated";
 
 export default function Pedidos({ navigation }) {
   const { produtos, setProdutos } = useContext(AuthContext);
-
+  const [saborRefri, setSaborRefri] = useState('') 
   const [refri, setRefri] = useState(false);
   const [cartao, setCartao] = useState(false);
   const [dinheiro, setDinheiro] = useState(false);
@@ -23,6 +24,19 @@ export default function Pedidos({ navigation }) {
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
   const [checked3, setChecked3] = useState(false);
+  const text = 
+  `
+    O seu pedido foi feito com sucesso!
+        -Local: ${local} 
+        - local de entrega: ${location}
+        Forma de pagamento:
+            - Cartão: ${cartao}
+            - Dinheiro: ${dinheiro}
+        Pedidos:
+    ${produtos.map(item => `\t - ${item.name} - ${item.quant} - R$ ${item.valor}\n`)}
+         Refrigerante: ${refri} - Sabor de Refrigerante: ${saborRefri} 
+    \t Total: R$ ${total}
+  `
   useEffect(() => {
     function loadTotal() {
       let total = 0;
@@ -32,11 +46,11 @@ export default function Pedidos({ navigation }) {
         if (produtos[key].name == "Refrigerante") {
           setRefri(true);
           console.log(refri);
+        } else {
+            setRefri(false)
         }
-        if (produtos[key].name !== "Refrigerante") {
-          setRefri(false);
-          console.log(refri);
-        }
+        
+        console.log(refri);
       }
     }
     return produtos.length === 0 ? setTotal(0) : loadTotal();
@@ -73,7 +87,7 @@ export default function Pedidos({ navigation }) {
           flexGrow: 1,
           alignItems: "center",
           backgroundColor: "#F8F8D9",
-          paddingBottom: 10,
+          paddingBottom: 20,
         }}
       >
         <Text style={styles.title}>Pedidos</Text>
@@ -122,7 +136,15 @@ export default function Pedidos({ navigation }) {
                   <Checkbox
                     color="#845A49"
                     status={checked ? "checked" : "unchecked"}
-                    onPress={() => setChecked(!checked)}
+                    onPress={() => {
+                        setChecked(!checked)
+                        if(checked1 == true || checked2 == true || checked3 == true){
+                            setChecked1(false)
+                            setChecked2(false)
+                            setChecked3(false)
+                        }
+                        setSaborRefri('coca')
+                    }}
                   />
                   <Text style={styles.modeText}>Coca</Text>
                 </View>
@@ -130,7 +152,15 @@ export default function Pedidos({ navigation }) {
                   <Checkbox
                     color="#845A49"
                     status={checked1 ? "checked" : "unchecked"}
-                    onPress={() => setChecked1(!checked1)}
+                    onPress={() => {
+                        setChecked1(!checked1)
+                        if(checked == true || checked2 == true || checked3 == true){
+                            setChecked(false)
+                            setChecked2(false)
+                            setChecked3(false)
+                        }
+                        setSaborRefri('Guaraná')
+                    }}
                   />
                   <Text style={styles.modeText}>Guaraná</Text>
                 </View>
@@ -138,7 +168,15 @@ export default function Pedidos({ navigation }) {
                   <Checkbox
                     color="#845A49"
                     status={checked2 ? "checked" : "unchecked"}
-                    onPress={() => setChecked2(!checked2)}
+                    onPress={() => {
+                        setChecked2(!checked2)
+                        if(checked == true || checked1 == true || checked3 == true){
+                            setChecked(false)
+                            setChecked1(false)
+                            setChecked3(false)
+                        }
+                        setSaborRefri('Fanta')
+                    }}
                   />
                   <Text style={styles.modeText}>Fanta</Text>
                 </View>
@@ -146,7 +184,15 @@ export default function Pedidos({ navigation }) {
                   <Checkbox
                     color="#845A49"
                     status={checked3 ? "checked" : "unchecked"}
-                    onPress={() => setChecked3(!checked3)}
+                    onPress={() => {
+                        setChecked3(!checked3)
+                        if(checked == true || checked1 == true || checked2 == true){
+                            setChecked(false)
+                            setChecked1(false)
+                            setChecked2(false)
+                        }
+                        setSaborRefri('Sprite')
+                    }}
                   />
                   <Text style={styles.modeText}>Sprite</Text>
                 </View>
@@ -159,14 +205,26 @@ export default function Pedidos({ navigation }) {
               <Text style={styles.modeText}>Cartão</Text>
               <Switch
                 value={cartao}
-                onValueChange={() => (setCartao(true), setDinheiro(false))}
+                onValueChange={() => {
+                    setCartao(true) 
+                    setDinheiro(false)
+                    if(cartao == true){
+                        setCartao(false)
+                    }
+                }}
               />
             </View>
             <View style={styles.mode}>
               <Text style={styles.modeText}>Dinheiro</Text>
               <Switch
                 value={dinheiro}
-                onValueChange={() => (setDinheiro(true), setCartao(false))}
+                onValueChange={() =>{
+                    setDinheiro(true)
+                    setCartao(false)
+                    if(dinheiro == true){
+                        setDinheiro(false)
+                    }
+                }}
               />
             </View>
           </View>
@@ -176,16 +234,28 @@ export default function Pedidos({ navigation }) {
               <Text style={styles.modeText}>Local</Text>
               <Switch
                 value={local}
-                onValueChange={() => (setLocal(true), setEntrega(false))}
+                onValueChange={() => {
+                    setLocal(true)
+                    setEntrega(false)
+                    if(local == true){
+                        setLocal(false)
+                    }
+                }}
               />
             </View>
             <View style={styles.mode}>
               <Text style={styles.modeText}>Entrega</Text>
               <Switch
                 value={entrega}
-                onValueChange={() => (
-                  setEntrega(true), setLocal(false), showDialog()
-                )}
+                onValueChange={() => {
+                  setEntrega(true) 
+                  setLocal(false)
+                  if(entrega == true){
+                    setEntrega(false)
+                    } else {
+                    showDialog()
+                    }
+                }}
               />
             </View>
           </View>
@@ -234,7 +304,7 @@ export default function Pedidos({ navigation }) {
           </Dialog.Actions>
         </Dialog>
         <Button
-          onPress={() => console.log('finalizado')}
+          onPress={() => console.log(text)}
           mode="contained"
           style={{ marginTop: 40, backgroundColor: "#845A49" }}
         >
