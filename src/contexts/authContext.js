@@ -1,11 +1,10 @@
 import React, { createContext, useState, useEffect } from "react";
 
+
 import { AsyncStorage } from "react-native";
-import {useFonts} from '@use-expo/font';
-import androidClientId from "../config/client_id";
 import * as Google from "expo-google-app-auth";
 import {View, ActivityIndicator} from 'react-native'
-
+import {ANDROID_CLIENT_ID} from '../../.env.json'
 const authContextData = {
   signed: Boolean,
   user: Object,
@@ -18,7 +17,6 @@ const authContextData = {
 const AuthContext = createContext({ authContextData });
 
 export const AuthProvider = ({ children }) => {
-  
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true)
   const [produtos, setProdutos] = useState([])
@@ -38,7 +36,7 @@ export const AuthProvider = ({ children }) => {
   async function signInWithGoogleAsync() {
     try {
       const result = await Google.logInAsync({
-        androidClientId: androidClientId,
+        androidClientId: ANDROID_CLIENT_ID,
         scopes: ["profile", "email"],
       });
 

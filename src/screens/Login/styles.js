@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     imgBackground: {
-        flex: 1,
         height: '100%',
         width: '100%'
     },
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
 
         elevation: 1,
-    }
+    },
 })
 
 export default styles

@@ -1,5 +1,6 @@
 import axios from 'axios'
+import {API_URL} from '../../.env.json'
 
 export const api = axios.create({
-    baseURL: 'https://decafe-bistro.firebaseio.com/'
+    baseURL: API_URL,
 })

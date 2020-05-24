@@ -14,7 +14,7 @@ import { Feather } from "@expo/vector-icons";
 import styles from "./styles";
 import { api } from "../../services/api";
 import AuthContext from "../../contexts/authContext";
-
+import * as Animatable from "react-native-animatable";
 const { height } = Dimensions.get("window");
 
 export default function Listprod() {
@@ -39,12 +39,17 @@ export default function Listprod() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <Animatable.View
+      animation="slideInUp"
+      delay={2000}
+      duration={2000}
+      style={styles.container}
+    >
       <Text style={styles.title}>Produtos</Text>
       <SafeAreaView style={{ paddingBottom: 20 }}>
         {prodData.length ? (
           prodData.map((item) => (
-            <View style={styles.boxContainer} key={item.id}>
+            <Animatable.View animation='fadeIn' delay={3000} duration={2000} style={styles.boxContainer} key={item.id}>
               <Image style={styles.image} />
               <Text style={styles.titleBox}>{item.title}</Text>
               <Text style={styles.desc}>{item.desc}</Text>
@@ -65,7 +70,7 @@ export default function Listprod() {
               >
                 <Feather name="shopping-cart" size={14} color="#845A49" />
               </TouchableOpacity>
-            </View>
+            </Animatable.View>
           ))
         ) : (
           <View
@@ -81,6 +86,6 @@ export default function Listprod() {
           </View>
         )}
       </SafeAreaView>
-    </View>
+    </Animatable.View>
   );
 }
