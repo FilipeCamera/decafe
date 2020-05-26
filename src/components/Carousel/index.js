@@ -27,7 +27,7 @@ export default function CarouselProd() {
 
     function _renderItem({item}) {
         return(
-            <View animation='bounceIn' style={{
+            <View animation='bounceIn' useNativeDriver={true} style={{
                 margin: 5,
                 backgroundColor: '#FFF',
                 height: 240,

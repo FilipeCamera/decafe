@@ -2,15 +2,14 @@ import React, { useState, useContext, useEffect } from "react";
 
 import styles from "./styles";
 import { Switch, Button, TextInput, Dialog } from "react-native-paper";
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Linking, Alert } from "react-native";
 import { HeaderTwo } from "../../components/Header";
 import { Checkbox } from "react-native-paper";
 import { Feather } from "@expo/vector-icons";
 import AuthContext from "../../contexts/authContext";
-import { set } from "react-native-reanimated";
 
 export default function Pedidos({ navigation }) {
-  const { produtos, setProdutos } = useContext(AuthContext);
+  const { produtos, setProdutos, user } = useContext(AuthContext);
   const [saborRefri, setSaborRefri] = useState('') 
   const [refri, setRefri] = useState(false);
   const [cartao, setCartao] = useState(false);
@@ -27,15 +26,24 @@ export default function Pedidos({ navigation }) {
   const text = 
   `
     O seu pedido foi feito com sucesso!
-        -Local: ${local} 
-        - local de entrega: ${location}
-        Forma de pagamento:
-            - Cartão: ${cartao}
-            - Dinheiro: ${dinheiro}
-        Pedidos:
-    ${produtos.map(item => `\t - ${item.name} - ${item.quant} - R$ ${item.valor}\n`)}
-         Refrigerante: ${refri} - Sabor de Refrigerante: ${saborRefri} 
-    \t Total: R$ ${total}
+
+    - Nome: ${user.name}
+
+    - Local: ${local}
+
+    - Local de entrega
+      => ${location}
+
+    Forma de pagamento:
+      - Cartão: ${cartao}
+      - Dinheiro: ${dinheiro}
+    
+    Pedidos:
+
+    ${produtos.map(item => `${item.name}-${item.quant}-R$${item.valor}\n\t`)}
+    Refrigerante: ${refri}
+     - Sabor de Refrigerante: ${saborRefri} 
+    \n\nTotal: R$ ${total}
   `
   useEffect(() => {
     function loadTotal() {
@@ -47,7 +55,7 @@ export default function Pedidos({ navigation }) {
           setRefri(true);
           console.log(refri);
         } else {
-            setRefri(false)
+          setRefri(false)
         }
         
         console.log(refri);
@@ -55,6 +63,19 @@ export default function Pedidos({ navigation }) {
     }
     return produtos.length === 0 ? setTotal(0) : loadTotal();
   });
+
+  function sendWhatsapp(){
+    if(produtos.length == 0){
+      return Alert.alert('Carrinho vazio! Escolha um produto.')
+    }
+    if(cartao == false && dinheiro == false){
+      return Alert.alert('Escolha a forma de pagamento!')
+    }
+    if(local == false && entrega == false){
+      return Alert.alert('Escolha a forma de retirada!')
+    }
+    Linking.openURL(`https://api.whatsapp.com/send?phone=5575988977636&text=${text}`)
+  }
   function removeProd(id) {
     setProdutos(produtos.filter((produto) => produto.id !== id));
   }
@@ -304,7 +325,10 @@ export default function Pedidos({ navigation }) {
           </Dialog.Actions>
         </Dialog>
         <Button
-          onPress={() => console.log(text)}
+          onPress={() => {
+            console.log(text)
+            sendWhatsapp()
+          }}
           mode="contained"
           style={{ marginTop: 40, backgroundColor: "#845A49" }}
         >

@@ -43,6 +43,7 @@ export default function Listprod() {
       animation="slideInUp"
       delay={2000}
       duration={2000}
+      useNativeDriver={true}
       style={styles.container}
     >
       <Text style={styles.title}>Produtos</Text>

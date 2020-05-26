@@ -14,10 +14,10 @@ export default function Home({navigation}){
                 showsVerticalScrollIndicator={false}
                 style={{backgroundColor: '#E0E094', flex: 1, paddingBottom: 50}}
             >
-                <Animatable.View animation='zoomIn' delay={2000} duration={2000}>
+                <Animatable.View animation='zoomIn' delay={2000} duration={2000} useNativeDriver={true}>
                     <CarouselProd />
                 </Animatable.View>
-                <Animatable.View animation='fadeIn' duration={2000} delay={2000}>
+                <Animatable.View animation='fadeIn' duration={2000} delay={2000} useNativeDriver={true}>
                     <Listprod />
                 </Animatable.View>
             </ScrollView>

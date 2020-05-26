@@ -15,28 +15,38 @@ export default function Login() {
     <View style={styles.container}>
       <View style={styles.boxImage}>
         <ImageBackground
-          source={require("../../images/decafe.jpg")}
+          source={require("../../images/background3.png")}
           style={styles.imgBackground}
         />
       </View>
       <Animatable.View
         animation="fadeInUp"
         duration={2000}
+        useNativeDriver={true}
         style={styles.boxButton}
       >
-        <Animatable.View animation='fadeIn' delay={2000} duration={1000}>
-            <Animatable.View
+        <Animatable.View
+          animation="fadeIn"
+          delay={2000}
+          duration={1000}
+          useNativeDriver={true}
+        >
+          <Animatable.View
             animation="rubberBand"
             delay={2000}
             duration={3000}
             style={styles.boxIcon}
-            >
+          >
             <Animatable.View animation="pulse" iterationCount="infinite">
-                <Feather name="coffee" size={32} color="#754C3B" />
+              <Feather name="coffee" size={30} color="#754C3B" />
             </Animatable.View>
-            </Animatable.View>
+          </Animatable.View>
         </Animatable.View>
-        <Animatable.View animation="lightSpeedIn" duration={2400} delay={3000}>
+        <Animatable.View
+          animation="lightSpeedIn"
+          duration={2400}
+          delay={3000}
+        >
           <TouchableOpacity
             style={styles.button}
             onPress={signInWithGoogleAsync}
@@ -46,6 +56,30 @@ export default function Login() {
               Sign in with Google
             </Text>
           </TouchableOpacity>
+        </Animatable.View>
+        <Animatable.View
+          animation="slideInUp"
+          delay={2500}
+          duration={2000}
+          useNativeDriver={true}
+          style={{
+            alignItems: "center",
+            flexDirection: "row",
+            position: "absolute",
+            bottom: 10,
+          }}
+        >
+          <Feather name="instagram" size={24} color="#E0E094" />
+          <Text
+            style={{
+              fontSize: 14,
+              color: "#E0E094",
+              marginLeft: 5,
+              fontWeight: "900",
+            }}
+          >
+            decafe_bistro
+          </Text>
         </Animatable.View>
       </Animatable.View>
     </View>
