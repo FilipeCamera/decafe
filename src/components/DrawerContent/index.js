@@ -31,14 +31,6 @@ export default function DrawerContent(props){
                     <Drawer.Section style={styles.drawerSec}>
                         <Drawer.Item
                             style={{width: '100%'}} 
-                            icon={() => <Feather name='user' size={24} color='#845A49' style={{marginLeft: 70}}/>}
-                            label='Usuário'
-                            onPress={() => props.navigation.navigate('Usuario')}
-                        />
-                    </Drawer.Section>
-                    <Drawer.Section style={styles.drawerSec}>
-                        <Drawer.Item
-                            style={{width: '100%'}} 
                             icon={() => <Feather name='shopping-bag' size={24} color='#845A49' style={{marginLeft: 70}}/>}
                             label='Pedidos'
                             onPress={() => props.navigation.navigate('Pedidos')}

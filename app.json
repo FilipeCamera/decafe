@@ -13,7 +13,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FFF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,6 +23,18 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "config": {
+        "googleSignIn": {
+          "apiKey": "AIzaSyA0iBGYeUR_7850VsoKHkNeKGC6ETes9Aw"
+        }
+      },
+      "package": "com.fltech.decafe",
+      "adaptiveIcon": {
+        "backgroundColor": "#FFF",
+        "foregroundImage": "./assets/icon.png"
+      }
     }
   }
 }

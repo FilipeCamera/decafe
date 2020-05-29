@@ -1,7 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 
 import AuthContext from "../../contexts/authContext";
-import { useFonts } from "@use-expo/font";
 import { View, ImageBackground, TouchableOpacity, Text } from "react-native";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 
@@ -15,7 +14,7 @@ export default function Login() {
     <View style={styles.container}>
       <View style={styles.boxImage}>
         <ImageBackground
-          source={require("../../images/background3.png")}
+          source={require("../../images/background.png")}
           style={styles.imgBackground}
         />
       </View>
@@ -53,7 +52,7 @@ export default function Login() {
           >
             <FontAwesome name="google" size={24} color="#797979" />
             <Text style={{ color: "#797979", fontSize: 16 }}>
-              Sign in with Google
+              Log in with Google
             </Text>
           </TouchableOpacity>
         </Animatable.View>

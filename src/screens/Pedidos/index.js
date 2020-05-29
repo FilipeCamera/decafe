@@ -40,7 +40,7 @@ export default function Pedidos({ navigation }) {
     
     Pedidos:
 
-    ${produtos.map(item => `${item.name}-${item.quant}-R$${item.valor}\n\t`)}
+    ${produtos.map(item => `${item.name} - ${item.quant} - R$${item.valor}\n\t`)}
     Refrigerante: ${refri}
      - Sabor de Refrigerante: ${saborRefri} 
     \n\nTotal: R$ ${total}

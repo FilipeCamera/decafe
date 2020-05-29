@@ -7,12 +7,13 @@ const styles = StyleSheet.create({
     },
     drawerSec: {
         alignItems: 'center',
-        marginTop: 10,
+        marginTop: 15,
     },
     bottomDrawerSec: {
         alignItems: 'center',
-        borderTopColor: '#f4f4f4',
+        borderTopColor: '#E0E094',
         borderTopWidth: 1,
+        paddingTop: 5
     },
     boxAvatar: {
         paddingTop: 20,

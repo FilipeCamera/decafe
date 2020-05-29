@@ -1,6 +1,5 @@
 import React from 'react'
 
-import Users from '../screens/Users'
 import Feedback from '../screens/Feedback'
 import Login from '../screens/Login'
 
@@ -15,11 +14,10 @@ const Drawer = createDrawerNavigator()
 export default function DrawerNavigation({route}){
     return(
         <Drawer.Navigator 
-            initialRouteName='Home' 
+            initialRouteName='Loading' 
             drawerContent={props => <DrawerContent {...props} {...route}/>}
         >
             <Drawer.Screen name='Home' component={Home} />
-            <Drawer.Screen name='Usuario' component={Users}/>
             <Drawer.Screen name='Pedidos' component={Pedidos}/>
             <Drawer.Screen name='Feedback' component={Feedback}/>
             <Drawer.Screen name='Sair' component={Login}/>

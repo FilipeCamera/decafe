@@ -5,7 +5,9 @@ import { AsyncStorage } from "react-native";
 import * as Google from "expo-google-app-auth";
 import {View, ActivityIndicator} from 'react-native'
 import {ANDROID_CLIENT_ID} from '../../.env.json'
-const authContextData = {
+import * as Font from 'expo-font'
+
+const appContextData = {
   signed: Boolean,
   user: Object,
   produtos: [],
@@ -14,12 +16,13 @@ const authContextData = {
 };
 
 
-const AuthContext = createContext({ authContextData });
+const ApplicationContext = createContext({ appContextData });
 
-export const AuthProvider = ({ children }) => {
+export const ApplicationProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true)
   const [produtos, setProdutos] = useState([])
+
   useEffect(() => {
     async function loadStorage(){
       const AuthStorage = await AsyncStorage.getItem('AuthUser')
@@ -27,6 +30,9 @@ export const AuthProvider = ({ children }) => {
       if(AuthStorage){
         setUser(JSON.parse(AuthStorage))
         setLoading(false)
+        await Font.loadAsync({
+          'brush-script-mt-italic': require('../../assets/fonts/brush-script-mt-italic.ttf')
+        })
       } else {
         setLoading(false)
       }
@@ -37,6 +43,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const result = await Google.logInAsync({
         androidClientId: ANDROID_CLIENT_ID,
+        androidStandaloneAppClientId: ANDROID_CLIENT_ID,
         scopes: ["profile", "email"],
       });
 
@@ -68,13 +75,13 @@ export const AuthProvider = ({ children }) => {
     )
   } else{
     return (
-      <AuthContext.Provider
+      <ApplicationContext.Provider
         value={{ signed: !!user, user, signInWithGoogleAsync, signOut, produtos, setProdutos }}
       >
         {children}
-      </AuthContext.Provider>
+      </ApplicationContext.Provider>
     );
   }
 };
 
-export default AuthContext;
+export default ApplicationContext;
