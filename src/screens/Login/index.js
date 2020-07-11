@@ -52,7 +52,7 @@ export default function Login() {
           >
             <FontAwesome name="google" size={24} color="#797979" />
             <Text style={{ color: "#797979", fontSize: 16 }}>
-              Log in with Google
+              Conectar com o Google
             </Text>
           </TouchableOpacity>
         </Animatable.View>

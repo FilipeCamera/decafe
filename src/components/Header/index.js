@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { View, Text, TouchableOpacity } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { Feather } from "@expo/vector-icons";
+import ApplicationContext from "../../contexts/appContext";
 
 export function HeaderTwo({ navigation }) {
   return (
@@ -34,6 +35,7 @@ export function HeaderTwo({ navigation }) {
 }
 
 export default function Header({ navigation }) {
+  const { produtos } = useContext(ApplicationContext);
   return (
     <View
       style={{
@@ -58,7 +60,16 @@ export default function Header({ navigation }) {
       >
         DêCafé Bistrô
       </Animatable.Text>
-      <Animatable.View animation="bounceInUp" duration={2000} delay={2000}>
+      <Animatable.View
+        animation="bounceInUp"
+        duration={2000}
+        delay={2000}
+        style={{ 
+          flexDirection: "row",
+          alignItems: 'center' 
+        }}
+      >
+        <Text style={{fontSize: 16, color: '#845A49', paddingRight: 5}}>{produtos.length != 0 ? `+${produtos.length}` : ""}</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Pedidos")}>
           <Feather name="shopping-bag" size={25} color="#845A49" />
         </TouchableOpacity>

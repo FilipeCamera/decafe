@@ -6,7 +6,7 @@ import { View, Text, ScrollView, TouchableOpacity, Linking, Alert } from "react-
 import { HeaderTwo } from "../../components/Header";
 import { Checkbox } from "react-native-paper";
 import { Feather } from "@expo/vector-icons";
-import AuthContext from "../../contexts/authContext";
+import AuthContext from "../../contexts/appContext";
 
 export default function Pedidos({ navigation }) {
   const { produtos, setProdutos, user } = useContext(AuthContext);
@@ -27,21 +27,21 @@ export default function Pedidos({ navigation }) {
   `
     O seu pedido foi feito com sucesso!
 
-    - Nome: ${user.name}
+    - Nome: 
 
-    - Local: ${local}
+    - Local: ${local == true ? 'sim': 'não'}
 
     - Local de entrega
       => ${location}
 
     Forma de pagamento:
-      - Cartão: ${cartao}
-      - Dinheiro: ${dinheiro}
+      - Cartão: ${cartao == true ? 'sim': 'não'}
+      - Dinheiro: ${dinheiro == true ? 'sim': 'não'}
     
     Pedidos:
 
     ${produtos.map(item => `${item.name} - ${item.quant} - R$${item.valor}\n\t`)}
-    Refrigerante: ${refri}
+    Refrigerante: ${refri == true ? 'sim': 'não'}
      - Sabor de Refrigerante: ${saborRefri} 
     \n\nTotal: R$ ${total}
   `
@@ -327,7 +327,7 @@ export default function Pedidos({ navigation }) {
         <Button
           onPress={() => {
             console.log(text)
-            sendWhatsapp()
+            //sendWhatsapp()
           }}
           mode="contained"
           style={{ marginTop: 40, backgroundColor: "#845A49" }}

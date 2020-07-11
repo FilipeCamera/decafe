@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react'
-import AuthContext from '../../contexts/authContext'
+import AuthContext from '../../contexts/appContext'
 import {View, Text} from 'react-native'
 import {Drawer, Avatar} from 'react-native-paper'
 import {DrawerContentScrollView} from '@react-navigation/drawer'
@@ -14,17 +14,17 @@ export default function DrawerContent(props){
                 <View style={styles.drawerContent}>
                     <View style={styles.boxAvatar}>
                         <Avatar.Image
-                            source={{uri: user.photoUrl}}
-                            size={140}
+                            //source={{uri: user.photoUrl}}
+                            //size={140}
                         />
         
-                        <Text style={styles.avatarTitle}>{user.name}</Text>
+                        <Text style={styles.avatarTitle}>{}</Text>
                     </View>
                     <Drawer.Section style={styles.drawerSec}>
                         <Drawer.Item
                             style={{width: '100%'}}
                             icon={() => <Feather name='home' size={24} color='#845A49' style={{marginLeft: 70}}/>}
-                            label='Home'
+                            label={<Text style={{fontSize: 16, color: '#845A49'}}>Home</Text>}
                             onPress={() => props.navigation.navigate('Home')}
                         />
                     </Drawer.Section>
@@ -32,7 +32,7 @@ export default function DrawerContent(props){
                         <Drawer.Item
                             style={{width: '100%'}} 
                             icon={() => <Feather name='shopping-bag' size={24} color='#845A49' style={{marginLeft: 70}}/>}
-                            label='Pedidos'
+                            label={<Text style={{fontSize: 16, color: '#845A49'}}>Pedidos</Text>}
                             onPress={() => props.navigation.navigate('Pedidos')}
                         />
                     </Drawer.Section>
@@ -40,7 +40,7 @@ export default function DrawerContent(props){
                         <Drawer.Item
                             style={{width: '100%'}} 
                             icon={() => <MaterialIcons name='feedback' size={24} color='#845A49' style={{marginLeft: 70}}/>}
-                            label='Feedback'
+                            label={<Text style={{fontSize: 16, color: '#845A49'}}>Feedback</Text>}
                             onPress={() => props.navigation.navigate('Feedback')}
                         />
                     </Drawer.Section>
@@ -51,7 +51,7 @@ export default function DrawerContent(props){
                 <Drawer.Item
                     style={{width: '100%'}} 
                     icon={() => <Feather name='log-out' size={24} color='#845A49'/>}
-                    label='Sign Out'
+                    label={<Text style={{fontSize: 16, fontWeight: 'bold', color: '#845A49'}}>Sair</Text>}
                     onPress={signOut}
                 />
             </Drawer.Section>
